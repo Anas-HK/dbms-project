@@ -1,12 +1,14 @@
-# Ecommerce Database Management System
+# Ecommerce Database Management System (v1.1)
 
-This repository contains a Java-based Ecommerce Database Management System with a MySQL backend, containerized with Docker for easy deployment.
+This repository contains a fully containerized Java-based Ecommerce Database Management System. The entire application, including both the Java application and MySQL database, runs in Docker containers, making it completely independent and easy to deploy on any machine that has Docker installed.
 
 ## Prerequisites
 
 - [Docker](https://www.docker.com/products/docker-desktop/) (version 20.10.0 or higher)
 - [Docker Compose](https://docs.docker.com/compose/install/) (version 2.0.0 or higher, included with Docker Desktop)
 - Git (optional, for cloning the repository)
+
+No other dependencies required - everything runs inside Docker containers!
 
 ## Quick Start
 
@@ -22,7 +24,7 @@ This repository contains a Java-based Ecommerce Database Management System with 
    ```
 
    This command will:
-   - Build the Java application container
+   - Build the Java application container (ecommerce-system:1.1)
    - Start the MySQL database container
    - Initialize the database with the schema from `ecommerce_db_setup.sql`
    - Start the application once the database is healthy
@@ -36,6 +38,19 @@ This repository contains a Java-based Ecommerce Database Management System with 
    ```
    docker-compose down
    ```
+
+## Container Information
+
+The application runs two containers:
+1. **ecommerce-app** (ecommerce-system:1.1)
+   - Java application container
+   - Built from OpenJDK 21-slim base image
+   - Automatically connects to the database container
+
+2. **ecommerce-db** (mysql:8.0)
+   - MySQL database container
+   - Exposes port 3306
+   - Data persisted in named volume: ecommerce-db-data
 
 ## Configuration
 
@@ -53,7 +68,7 @@ The Docker setup uses the following environment variables that can be modified i
 
 ## Data Persistence
 
-The MySQL data is persisted in a Docker volume named `db_data`. This ensures that your data remains intact even after stopping and restarting the containers.
+The MySQL data is persisted in a Docker volume named `ecommerce-db-data`. This ensures that your data remains intact even after stopping and restarting the containers.
 
 ## Development
 
@@ -111,6 +126,15 @@ docker-compose up
 ```
 
 This will remove the database volume, causing the database to be reinitialized from the SQL script on next startup.
+
+## Version History
+
+### v1.1
+- Added container health checks
+- Improved database connection reliability
+- Added container names and version tags
+- Implemented automatic container restart
+- Enhanced error messages and troubleshooting guidance
 
 ## License
 

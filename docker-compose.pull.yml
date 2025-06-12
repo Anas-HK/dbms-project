@@ -1,6 +1,5 @@
 services:
   app:
-    build: .
     image: anashk/dbms-project:1.1
     container_name: ecommerce-app
     depends_on:
@@ -11,15 +10,12 @@ services:
       - DB_NAME=cinema
       - DB_USER=root
       - DB_PASS=root
-    volumes:
-      - ./lib:/app/lib
-      - ./src:/app/src
     stdin_open: true
     tty: true
     restart: unless-stopped
 
   db:
-    image: mysql:8.0
+    image: anashk/dbms-project-db:1.1
     container_name: ecommerce-db
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -27,7 +23,6 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - db_data:/var/lib/mysql
-      - ./db/cinema.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
     healthcheck:
@@ -40,4 +35,4 @@ services:
 
 volumes:
   db_data:
-    name: ecommerce-db-data
+    name: ecommerce-db-data 

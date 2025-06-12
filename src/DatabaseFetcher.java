@@ -88,7 +88,7 @@ public class DatabaseFetcher {
             }
         } catch (SQLException e) {
             ConsoleColors.printError("SQL Error: " + e.getMessage());
-            System.out.println("Check if Laragon MySQL is running and 'cinema' database exists");
+            System.out.println("Please check if the database container is running and healthy");
             return false;
         } catch (ClassNotFoundException e) {
             ConsoleColors.printError("Driver not found: " + e.getMessage());

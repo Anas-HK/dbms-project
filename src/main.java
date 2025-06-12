@@ -28,7 +28,11 @@ public class main {
         } catch (Exception e) {
             ConsoleColors.printError("Failed to connect to database: " + e.getMessage());
             e.printStackTrace();
-            System.out.println("Please make sure Laragon MySQL is running and restart the application.");
+            System.out.println("\nTROUBLESHOOTING TIPS:");
+            System.out.println("1. Ensure Docker containers are running: docker-compose ps");
+            System.out.println("2. Check container logs: docker-compose logs");
+            System.out.println("3. Verify database is healthy: docker-compose exec db mysqladmin -u root -proot ping");
+            System.out.println("4. Try restarting containers: docker-compose down && docker-compose up");
             System.exit(1);
         }
         
